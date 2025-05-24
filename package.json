@@ -31,7 +31,7 @@
 	"private": false,
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/vortiq/eml-parse-js"
+		"url": "git+https://github.com/harbridge-c/eml-parse-js"
 	},
 	"keywords": [
 		"eml",
@@ -43,9 +43,9 @@
 	"author": "bean",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/vortiq/eml-parse-js/issues"
+		"url": "https://github.com/harbridge-c/eml-parse-js/issues"
 	},
-	"homepage": "https://github.com/vortiq/eml-parse-js#readme",
+	"homepage": "https://github.com/harbridge-c/eml-parse-js#readme",
 	"contributors": [
 		{
 			"name": "Charlie Harding",
@@ -93,5 +93,5 @@
 		"@sinonjs/text-encoding": "^0.7.3",
 		"js-base64": "^3.7.7"
 	},
-	"packageManager": "pnpm@10.10.0"
+	"packageManager": "pnpm@10.11.0"
 }
