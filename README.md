@@ -34,7 +34,7 @@ Here's a quick example of how to parse an EML file string and access its content
 ```javascript
 import { parseEml, readEml } from '@vortiq/eml-parse-js';
 
-const emlString = `Date: Wed, 01 Jan 2020 00:00:00 -0000
+const emlString = `Date: Wed, 02 Jan 2020 00:00:00 -0000
 From: sender@example.com
 To: receiver@example.com
 Subject: Hello World
