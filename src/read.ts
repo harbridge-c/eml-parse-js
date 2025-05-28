@@ -16,6 +16,29 @@ import { unquotePrintable, unquoteString } from "./header";
 import { getEmailAddress } from "./header";
 import { parse } from "./parse";
 
+// Utility: basic validation for Base64 strings to avoid DOMExceptions when
+// decoding malformed data.
+const BASE64_RE = /^[A-Za-z0-9+/]+={0,2}$/;
+
+function isValidBase64(value: string): boolean {
+    if (!value) return false;
+    const sanitized = value.replace(/\s+/g, "");
+    return sanitized.length % 4 === 0 && BASE64_RE.test(sanitized);
+}
+
+function safeBase64Decode(value: string): string {
+    if (!isValidBase64(value)) {
+        console.warn("Invalid base64 data encountered, skipping decode");
+        return value;
+    }
+    try {
+        return Base64.decode(value);
+    } catch (err) {
+        console.warn("Base64 decode failed", err);
+        return value;
+    }
+}
+
 
 export const read = (
     eml: ParsedEml,
@@ -56,9 +79,12 @@ export const read = (
 
             try {
                 if (encoding === 'base64') {
-                    htmlContent = Base64.decode(htmlContent);
-                } else if (Base64.btoa(Base64.atob(htmlContent)) == htmlContent) {
-                    htmlContent = Base64.atob(htmlContent);
+                    htmlContent = safeBase64Decode(htmlContent);
+                } else {
+                    const decoded = safeBase64Decode(htmlContent);
+                    if (decoded !== htmlContent && Base64.btoa(decoded) === htmlContent.replace(/\s+/g, '')) {
+                        htmlContent = decoded;
+                    }
                 }
             } catch (error) {
                 console.error(error);
@@ -80,7 +106,7 @@ export const read = (
                 content = decode(content as Uint8Array, charset);
             }
             if (encoding === 'base64') {
-                content = Base64.decode(content);
+                content = safeBase64Decode(content);
             }
             //Plain text message
 
