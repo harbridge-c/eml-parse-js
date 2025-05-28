@@ -164,5 +164,17 @@ Content-Transfer-Encoding: 7bit\r\n\
         expect(result).toBeInstanceOf(Object);
     });
 
+    it('should gracefully handle invalid base64 body without throwing', () => {
+        const eml = `Date: Mon, 30 Sep 2024 10:00:00 +0000\r\n\
+From: sender@example.com\r\n\
+Subject: Invalid Base64\r\n\
+Content-Type: text/plain; charset=utf-8\r\n\
+Content-Transfer-Encoding: base64\r\n\
+!!!not base64!!!`;
+
+        const result = readEml(parseEml(eml)) as EmlContent;
+        expect(result.text).toBe(undefined);
+    });
+
     // More tests for multipart and attachments will be added here
 }); 
