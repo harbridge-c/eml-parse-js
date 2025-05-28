@@ -1,6 +1,6 @@
 {
 	"name": "@vortiq/eml-parse-js",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Format EML file in browser environment",
 	"main": "./dist/index.cjs.js",
 	"module": "./dist/index.es.js",
