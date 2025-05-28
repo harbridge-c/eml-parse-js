@@ -28,7 +28,6 @@ function isValidBase64(value: string): boolean {
 
 function safeBase64Decode(value: string): string {
     if (!isValidBase64(value)) {
-        // console.warn("Invalid base64 data encountered, skipping decode");
         return value;
     }
     try {
