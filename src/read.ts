@@ -89,6 +89,7 @@ export const read = (
                 console.error(error);
             }
 
+
             if (result.html) {
                 result.html += htmlContent;
             } else {
@@ -104,10 +105,8 @@ export const read = (
             if (typeof content !== 'string') {
                 content = decode(content as Uint8Array, charset);
             }
-            if (encoding === 'base64') {
-                content = safeBase64Decode(content);
-            }
             //Plain text message
+            content = safeBase64Decode(content);
 
             if (result.text) {
                 result.text += content;
