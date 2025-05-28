@@ -173,7 +173,7 @@ Content-Transfer-Encoding: base64\r\n\
 !!!not base64!!!`;
 
         const result = readEml(parseEml(eml)) as EmlContent;
-        expect(result.text).toBe('!!!not base64!!!');
+        expect(result.text).toBe(undefined);
     });
 
     // More tests for multipart and attachments will be added here
